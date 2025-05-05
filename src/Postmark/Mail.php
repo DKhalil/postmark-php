@@ -24,6 +24,7 @@ class Mail
 	const DEBUG_RETURN = 2;
 	const TESTING_API_KEY = 'POSTMARK_API_TEST';
 	const MAX_ATTACHMENT_SIZE = 10485760; // 10 MB
+	const MAX_RECIPIENTS = 50;
 	const RECIPIENT_TYPE_TO = 'to';
 	const RECIPIENT_TYPE_CC = 'cc';
 	const RECIPIENT_TYPE_BCC = 'bcc';
@@ -433,7 +434,7 @@ class Mail
 			throw new InvalidArgumentException("Address \"{$address}\" is invalid");
 		}
 
-		if (count($this->_to) + count($this->_cc) + count($this->_bcc) === 20) {
+		if (count($this->_to) + count($this->_cc) + count($this->_bcc) === self::MAX_RECIPIENTS) {
 			throw new OverflowException('Too many email recipients');
 		}
 
